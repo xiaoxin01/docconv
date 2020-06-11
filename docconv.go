@@ -19,6 +19,28 @@ type Response struct {
 	Error string            `json:"error"`
 }
 
+// Config settings for doc conv
+type Config struct {
+	MaxWord int
+}
+
+var (
+	config Config
+)
+
+// SetConfig set configuration for docconv
+func SetConfig(c Config) {
+	config = c
+}
+
+func checkMaxWord() bool {
+	return config.MaxWord > 0
+}
+
+func maxWordExceed(length int) bool {
+	return length > config.MaxWord
+}
+
 // MimeTypeByExtension returns a mimetype for the given extension, or
 // application/octet-stream if none can be determined.
 func MimeTypeByExtension(filename string) string {

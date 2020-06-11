@@ -69,6 +69,10 @@ func XMLToText(r io.Reader, breaks []string, skip []string, strict bool) (string
 				}
 			}
 		}
+		// check max word limit for insufficient memory
+		if checkMaxWord() && maxWordExceed(len(result)) {
+			break
+		}
 	}
 	return result, nil
 }
