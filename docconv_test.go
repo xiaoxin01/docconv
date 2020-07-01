@@ -20,6 +20,16 @@ func TestConvertTrimsSpace(t *testing.T) {
 	}
 }
 
+func TestConvertPptx(t *testing.T) {
+	resp, err := ConvertPath("pptx_test/testdata/sample.pptx")
+	if err != nil {
+		t.Fatalf("got error = %v, want nil", err)
+	}
+	if want := "Get text from pptx"; !strings.Contains(resp.Body, want) {
+		t.Errorf("expected %v to contain %v", resp.Body, want)
+	}
+}
+
 func TestXMLMaxWord(t *testing.T) {
 	t.Run("max word not set", func(t *testing.T) {
 		checkMaxWord := checkXMLMaxWord()

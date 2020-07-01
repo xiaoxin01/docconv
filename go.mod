@@ -3,6 +3,7 @@ module github.com/xiaoxin01/docconv
 go 1.14
 
 require (
+	code.sajari.com/docconv v1.1.0
 	github.com/JalfResi/justext v0.0.0-20170829062021-c0282dea7198
 	github.com/PuerkitoBio/goquery v1.5.1 // indirect
 	github.com/advancedlogic/GoOse v0.0.0-20191112112754-e742535969c1
