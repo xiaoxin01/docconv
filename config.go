@@ -17,6 +17,7 @@ type LenthLimitation struct {
 
 var (
 	config Config
+	buf    []byte
 )
 
 // SetConfig set configuration for docconv
@@ -30,4 +31,11 @@ func checkXMLMaxWord() bool {
 
 func xmlMaxWordExceed(length int) bool {
 	return length > config.Limitation.XMLMaxWord
+}
+
+func getTempBuf() []byte {
+	if buf == nil || cap(buf) != config.Limitation.XMLMaxWord {
+		buf = make([]byte, config.Limitation.XMLMaxWord)
+	}
+	return buf
 }

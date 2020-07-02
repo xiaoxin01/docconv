@@ -10,6 +10,8 @@ import (
 	"os/exec"
 	"strings"
 	"time"
+
+	"github.com/xiaoxin01/goutil/strutil"
 )
 
 // ConvertDoc converts an MS Word .doc to text.
@@ -71,14 +73,25 @@ func ConvertDoc(r io.Reader) (string, map[string]string, error) {
 			log.Println("wvText:", err)
 		}
 
-		var buf bytes.Buffer
-		_, err = buf.ReadFrom(outputFile)
-		if err != nil {
-			// TODO: Remove this.
-			log.Println("wvText:", err)
-		}
+		if checkXMLMaxWord() {
+			buf := getTempBuf()
+			n, err := outputFile.Read(buf)
+			if err != nil {
+				log.Println("read temp file err:", err)
+			}
+			buf = strutil.SubBytesWithRuneCheck(buf[:n], n)
 
-		bc <- buf.String()
+			bc <- string(buf)
+		} else {
+			var buf bytes.Buffer
+			_, err = buf.ReadFrom(outputFile)
+			if err != nil {
+				// TODO: Remove this.
+				log.Println("wvText:", err)
+			}
+
+			bc <- buf.String()
+		}
 	}()
 
 	// TODO: Should errors in either of the above Goroutines stop things from progressing?

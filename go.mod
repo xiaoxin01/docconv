@@ -16,6 +16,8 @@ require (
 	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/olekukonko/tablewriter v0.0.4 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
+	github.com/xiaoxin01/goutil v0.0.1
 	golang.org/x/net v0.0.0-20200602114024-627f9648deb9
 	golang.org/x/text v0.3.2 // indirect
+	gotest.tools v2.2.0+incompatible // indirect
 )
